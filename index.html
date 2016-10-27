@@ -1,25 +1,50 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
+<html>
 
-<input class="form-control" data-bind="value: Query, valueUpdate: 'keyup'" autocomplete="off">
+<head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
+	<script src="google.js"></script>
+	<script src="data.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
 
-<h3>Search results:</h3>
-<ul data-bind="foreach: searchResults">
-  <li data-bind="text: Name"></li>
-</ul>
-<script>
-var viewModel = {
-  items: [ { Name: "Apple part" }, { Name: "Apple sauce" }, { Name: "Apple juice" }, { Name: "Pear juice" }, { Name: "Pear mush" }, { Name: "Something different" } ]
-};
-
-viewModel.Query = ko.observable('');
-
-viewModel.searchResults = ko.computed(function() {
-    var q = viewModel.Query();
-    return viewModel.items.filter(function(i) {
-      return i.Name.toLowerCase().indexOf(q) >= 0;
-    });
-});
-
-ko.applyBindings(viewModel);
-
+<body>
+	<div class="container">
+		<div class="options-box">
+			<!--<button onClick="location.reload();" class="btn"></button>-->
+			<input data-bind="value: Query, valueUpdate: 'keyup', event: {keypress: enterSearch}" autocomplete="off" placeholder="Search:" class="input">
+			<button data-bind="click:textSearchPlaces" class="btn2"></button>
+			<h1>Location names:</h1>
+			<ul data-bind="foreach: searchResults">
+				<p data-bind="text: title">
+					<br/>
+				</p>
+			</ul>
+		</div>
+		<div id="map"></div>
+	</div>
+	<script>
+		
+		viewModel.Query = ko.observable('');
+		
+		viewModel.searchResults = ko.computed(function () {
+			var q = viewModel.Query().toLowerCase();
+			return viewModel.locations.filter(function (i) {
+				console.log(q);
+				return i.title.toLowerCase().indexOf(q) >= 0;
+					
+			});
+		});
+		viewModel.textSearchPlaces = ko.observable();
+				//when enter, textSearch Places called
+				viewModel.enterSearch = function (d, e) {
+					
+					e.keyCode === 13 && viewModel.textSearchPlaces();
+					return true;
+				};
+		ko.applyBindings(viewModel);
+	</script>
+</body>
+<script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyBnaS5G8LBLYT0EqlZTIH7k3EHXK1GcPd8&v=3&callback=initMap">
 </script>
+
+</html>

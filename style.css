@@ -1,0 +1,107 @@
+html,
+body {
+	font-family: Arial, sans-serif;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+
+.input {
+	width: 63%;
+	height: 48px;
+	/*background: url(image/search2.gif) no-repeat left center;
+	background-size: 60% 60%;*/
+	padding:0px;
+	margin:0px;
+}
+
+h1 {
+	color: #525454;
+	font-size: 18px;
+	margin: 0 0 10px 0;
+	text-align: center;
+}
+
+hr {
+	background: #D0D7D9;
+	height: 1px;
+	margin: 20px 0 20px 0;
+	border: none;
+}
+
+#map {
+	bottom: 0px;
+	width: 80%;
+	height: 100%;
+	position: absolute;
+	right: 0px;
+}
+
+.options-box {
+	background: #fff;
+	border: 1px solid #999;
+	border-radius: 3px;
+	height: 100%;
+	line-height: 35px;
+	/*padding: 5px;*/
+	text-align: left;
+	width: 19%;
+}
+
+#pano {
+	width: 200px;
+	height: 200px;
+}
+
+.text {
+	font-size: 12px;
+}
+
+#toggle-drawing {
+	width: 27%;
+	position: relative;
+	margin-left: 10px;
+}
+
+.btn {
+	border: none;
+	font-family: Arial;
+	color: #ffffff;
+	font-size: 14px;
+	text-decoration: none;
+	background: url(image/home.png) no-repeat left center;
+	background-size: 50px 50px;
+	width: 100%;
+	height: 15%;
+	cursor: pointer;
+}
+
+.btn2 {
+	
+	background: url(image/filter.jpg) no-repeat left center;
+	background-size: 100% 100%;
+	width: 33%;
+	height: 48px;
+	cursor: pointer;
+	padding:0px;
+	margin:0px;
+	/*border:1px solid;*/
+}
+
+ul,
+menu,
+dir {
+	display: block;
+	list-style-type: disc;
+	-webkit-margin-before: 0em;
+	-webkit-margin-after: 0em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	-webkit-padding-start: 0px;
+}

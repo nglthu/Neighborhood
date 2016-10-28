@@ -1,50 +1,61 @@
 <html>
 
 <head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
-	<script src="google.js"></script>
-	<script src="data.js"></script>
-	<link rel="stylesheet" type="text/css" href="style.css">
-</head>
+	<script asyn src="js/google.js"></script>
+	<script asyn src="js/data.js"></script>
+	<script asyn src="js/flickr.js"></script>
+	<script asyn src="js/model.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/style.css"> </head>
 
 <body>
 	<div class="container">
 		<div class="options-box">
-			<!--<button onClick="location.reload();" class="btn"></button>-->
+			<!-- Trigger/Open The Modal -->
+			<button id="myBtn" >Open Modal</button>
+			<!-- The Modal -->
+			<div id="myModal" class="modal">
+				<!-- Modal content -->
+				<div class="modal-content"> <span class="close">×</span>
+					<p>Some text in the Modal..</p>
+				</div>
+			</div>
+			<button onClick="location.reload();" class="btn"></button>
+			<p id="flickr1">Testing</p>
 			<input data-bind="value: Query, valueUpdate: 'keyup', event: {keypress: enterSearch}" autocomplete="off" placeholder="Search:" class="input">
 			<button data-bind="click:textSearchPlaces" class="btn2"></button>
 			<h1>Location names:</h1>
 			<ul data-bind="foreach: searchResults">
-				<p data-bind="text: title">
-					<br/>
-				</p>
-			</ul>
+				<a href="#" data-bind="text: title, click:$root.textSearchPlacesLink($data)"> </a>
+				<br/> </ul>
 		</div>
 		<div id="map"></div>
 	</div>
 	<script>
-		
 		viewModel.Query = ko.observable('');
-		
 		viewModel.searchResults = ko.computed(function () {
 			var q = viewModel.Query().toLowerCase();
 			return viewModel.locations.filter(function (i) {
-				console.log(q);
 				return i.title.toLowerCase().indexOf(q) >= 0;
-					
 			});
 		});
 		viewModel.textSearchPlaces = ko.observable();
-				//when enter, textSearch Places called
-				viewModel.enterSearch = function (d, e) {
-					
-					e.keyCode === 13 && viewModel.textSearchPlaces();
-					return true;
-				};
+		viewModel.textSearchPlacesLink = ko.observable();
+		//when enter, textSearch Places called
+		viewModel.enterSearch = function (d, e) {
+			e.keyCode === 13 && viewModel.textSearchPlaces();
+			return true;
+		};
 		ko.applyBindings(viewModel);
 	</script>
 </body>
 <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyBnaS5G8LBLYT0EqlZTIH7k3EHXK1GcPd8&v=3&callback=initMap">
 </script>
+<!--<script src="https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=8dab8502838fc3c0fe9aa97fd57f23b2&tags=flower&per_page=3&format=rest&auth_token=72157675686894326-fa6cc6bbd8aeb0fc&api_sig=e406bb596e6f5361929703742243b232">
+</script>-->
+<script src="https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=8dab8502838fc3c0fe9aa97fd57f23b2&tags=flower&per_page=3&format=json&auth_token=72157675686894326-fa6cc6bbd8aeb0fc&api_sig=38e877392a1ebcb1386b18e22ab3a8ec"></script>
 
 </html>

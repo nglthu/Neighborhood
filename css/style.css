@@ -13,7 +13,7 @@ body {
 }
 
 .input {
-	width: 63%;
+	width: 75%;
 	height: 48px;
 	/*background: url(image/search2.gif) no-repeat left center;
 	background-size: 60% 60%;*/
@@ -25,7 +25,7 @@ h1 {
 	color: #525454;
 	font-size: 18px;
 	margin: 0 0 10px 0;
-	text-align: center;
+	text-align: left;
 }
 
 hr {
@@ -75,21 +75,34 @@ hr {
 	color: #ffffff;
 	font-size: 14px;
 	text-decoration: none;
-	background: url(image/home.png) no-repeat left center;
+	background: url(home.png) no-repeat left center;
 	background-size: 50px 50px;
 	width: 100%;
 	height: 15%;
 	cursor: pointer;
+	padding:5px;
 }
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 
 .btn2 {
 	
-	background: url(image/filter.jpg) no-repeat left center;
+	background: url(filter.jpg) no-repeat center center;
 	background-size: 100% 100%;
-	width: 33%;
+	width: 10%;
 	height: 48px;
 	cursor: pointer;
-	padding:0px;
+	padding:18px;
 	margin:0px;
 	/*border:1px solid;*/
 }
@@ -104,4 +117,42 @@ dir {
 	-webkit-margin-start: 0px;
 	-webkit-margin-end: 0px;
 	-webkit-padding-start: 0px;
+}
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
 }

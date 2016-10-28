@@ -10,7 +10,6 @@
 			var photo = rsp.photos.photo[i];
 			// http://farm{id}.static.flickr.com/{server-id}/{id}_{secret}_[mstb].jpg
 			var flickr = document.getElementById('flickr');
-			
 			$('#light').prepend('<img src="http://farm' + photo.farm + '.static.flickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '_' + 't.jpg" height="auto" width="50%"/>');
 		}
 	}

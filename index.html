@@ -8,19 +8,17 @@
 	<script asyn src="js/google.js"></script>
 	<script asyn src="js/data.js"></script>
 	<script asyn src="js/flickr.js"></script>
-	
 	<link rel="stylesheet" type="text/css" href="css/style.css"> </head>
 
 <body>
 	<div class="container">
 		<div class="options-box">
-			
 			<button onClick="location.reload();" class="btn"></button>
-			<a href="javascript:void(0)" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'" ><button class="btn3"></button></a> 
+			<a href="javascript:void(0)" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">
+				<button class="btn3"></button>
+			</a>
 			<div id="light" class="white_content"><a href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">Close</a> </div>
 			<div id="fade" class="black_overlay"></div>
-			
-			
 			<input data-bind="value: Query, valueUpdate: 'keyup', event: {keypress: enterSearch}" autocomplete="off" placeholder="Search:" class="input">
 			<button data-bind="click:textSearchPlaces" class="btn2"></button>
 			<h1>Location names:</h1>
@@ -50,7 +48,6 @@
 </body>
 <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyBnaS5G8LBLYT0EqlZTIH7k3EHXK1GcPd8&v=3&callback=initMap">
 </script>
-
 <script src="https://api.flickr.com/services/rest/?method=flickr.people.getPhotos&api_key=fc2bbb66b8ec6a5bc5a2c8fac8970a8d&user_id=9071746%40N06&per_page=2&page=&format=json"></script>
 
 </html>

@@ -3,28 +3,24 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
+	<script asyn src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script asyn src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
 	<script asyn src="js/google.js"></script>
 	<script asyn src="js/data.js"></script>
 	<script asyn src="js/flickr.js"></script>
-	<script asyn src="js/model.js"></script>
+	
 	<link rel="stylesheet" type="text/css" href="css/style.css"> </head>
 
 <body>
 	<div class="container">
 		<div class="options-box">
-			<!-- Trigger/Open The Modal -->
-			<button id="myBtn" >Open Modal</button>
-			<!-- The Modal -->
-			<div id="myModal" class="modal">
-				<!-- Modal content -->
-				<div class="modal-content"> <span class="close">×</span>
-					<p>Some text in the Modal..</p>
-				</div>
-			</div>
+			
 			<button onClick="location.reload();" class="btn"></button>
-			<p id="flickr1">Testing</p>
+			<a href="javascript:void(0)" onclick="document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'" ><button class="btn3"></button></a> 
+			<div id="light" class="white_content"><a href="javascript:void(0)" onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">Close</a> </div>
+			<div id="fade" class="black_overlay"></div>
+			
+			
 			<input data-bind="value: Query, valueUpdate: 'keyup', event: {keypress: enterSearch}" autocomplete="off" placeholder="Search:" class="input">
 			<button data-bind="click:textSearchPlaces" class="btn2"></button>
 			<h1>Location names:</h1>
@@ -54,8 +50,7 @@
 </body>
 <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyBnaS5G8LBLYT0EqlZTIH7k3EHXK1GcPd8&v=3&callback=initMap">
 </script>
-<!--<script src="https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=8dab8502838fc3c0fe9aa97fd57f23b2&tags=flower&per_page=3&format=rest&auth_token=72157675686894326-fa6cc6bbd8aeb0fc&api_sig=e406bb596e6f5361929703742243b232">
-</script>-->
-<script src="https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=8dab8502838fc3c0fe9aa97fd57f23b2&tags=flower&per_page=3&format=json&auth_token=72157675686894326-fa6cc6bbd8aeb0fc&api_sig=38e877392a1ebcb1386b18e22ab3a8ec"></script>
+
+<script src="https://api.flickr.com/services/rest/?method=flickr.people.getPhotos&api_key=c378746fecb770c17e24d7a8ee07558b&user_id=9071746%40N06&per_page=2&format=json&auth_token=72157675803502515-e202fd2932869f76&api_sig=f2ea967f6aa5c7e41ee6d3c811304faa"></script>
 
 </html>

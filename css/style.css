@@ -70,28 +70,46 @@ hr {
 }
 
 .btn {
-	border: none;
-	font-family: Arial;
-	color: #ffffff;
-	font-size: 14px;
-	text-decoration: none;
-	background: url(home.png) no-repeat left center;
-	background-size: 50px 50px;
-	width: 100%;
-	height: 15%;
+	border:none;
+	background: url(home.png) no-repeat center center;
+	background-size: 100% 100%;
+	width: 20%;
+	height: 13%;
 	cursor: pointer;
-	padding:5px;
-}
+	padding:25px;
+	/*margin-left:10px;*/
+	position:relative;
+	
+	}
+.btn3 {
+	border:none;
+	background: url(flickr.jpg) no-repeat center center;
+	background-size: 100% 100%;
+	width: 20%;
+	height: 13%;
+	cursor: pointer;
+	padding:25px;
+	/*margin-left:10px;*/
+	position:relative;
+	
+	}
+
 a:link {
     text-decoration: none;
+	padding:0px;
+	margin:0px;
 }
 
 a:visited {
     text-decoration: none;
+	padding:0px;
+	margin:0px;
 }
 
 a:hover {
     text-decoration: underline;
+	padding:0px;
+	margin:0px;
 }
 
 
@@ -119,28 +137,7 @@ dir {
 	-webkit-padding-start: 0px;
 }
 /* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
 
-/* Modal Content */
-.modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-}
 
 /* The Close Button */
 .close {
@@ -155,4 +152,30 @@ dir {
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+.black_overlay {
+  display: none;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 1001;
+  -moz-opacity: 0.8;
+  opacity: .80;
+  filter: alpha(opacity=80);
+}
+.white_content {
+  display: none;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  padding: 16px;
+  border: 16px solid orange;
+  background-color: white;
+  z-index: 1002;
+  overflow: auto;
 }

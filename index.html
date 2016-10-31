@@ -20,7 +20,7 @@
 			<button data-bind="click:textSearchPlaces" class="btn2"></button>
 			<h1>Location names:</h1>
 			<ul data-bind="foreach: searchResults">
-				<a href="#" data-bind="text: title,valueUpdate: 'keyup', event:{keypress:$root.textSearchPlacesLink($data)"> </a>
+				<a href="#" data-bind="text: title,valueUpdate: 'keyup', click:$root.textSearchPlacesLink($data)"> </a>
 				
 				<br/> </ul>
 		</div>
@@ -42,6 +42,7 @@
 			e.keyCode === 13 && viewModel.textSearchPlaces();
 			return true;
 		};
+		
 		
 		ko.applyBindings(viewModel);
 	</script>

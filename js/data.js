@@ -1,12 +1,6 @@
 var viewModel = {
 	locations: [{
-		title: 'Subway'
-		, location: {
-			lat: -36.8737632
-			, lng: 174.7936569
-		}
-		, detail: "Eat Fresh"
-			}, {
+		
 		title: 'Auckland Town Hall'
 		, location: {
 			lat: -36.8530296

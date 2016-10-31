@@ -1,15 +1,23 @@
-	function jsonFlickrApi(rsp) {
+	
+function jsonFlickrApi(rsp) {
 		window.rsp = rsp;
-		// http://farm{id}.static.flickr.com/{server-id}/{id}_{secret}_[mstb].jpg
-		// http://www.flickr.com/photos/{user-id}/{photo-id}
-		if (rsp.stat != "ok") {
-			$('#light').prepend("Sorry API Key is expired, can not retrieve Flickr photo");
-			return;
-		}
-		for (var i = 0; i < rsp.photos.photo.length; i++) {
-			var photo = rsp.photos.photo[i];
-			// http://farm{id}.static.flickr.com/{server-id}/{id}_{secret}_[mstb].jpg
-			var flickr = document.getElementById('flickr');
-			$('#light').prepend('<img src="http://farm' + photo.farm + '.static.flickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '_' + 't.jpg" height="auto" width="50%"/>');
-		}
+}
+function detailInfo(item,detail) {
+		//Read in the title of each photo
+		//Get the url for the image.
+		var photoURL = '//farm' + item.farm + '.static.flickr.com/' + item.server + '/' + item.id + '_' + item.secret + '_m.jpg';
+		var htmlImageString = '<img src="' + photoURL + '" alt="' + item.title + '" />';
+		
+		var imgLink = '<a href="https://www.flickr.com/photos/culkin/' + item.id + '/in/dateposted-public/" target="_blank">View on Flickr</a>'
+			
+		return '<div class="pop_up_image_box_text">' +'<strong>'+ item.title + '</strong><br>' +detail+ '<br>'+ htmlImageString + '<br>' +imgLink + '</div>';
 	}
+
+//Function that starts the process of loading the images using the Flickr API.
+function loadPhotos() {
+  //Connects to the Flickr API and reads the results of the query into a JSON array. 
+  var flickrCall='https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=fc2bbb66b8ec6a5bc5a2c8fac8970a8d&user_id=9071746%40N06&privacy_filter=1&has_geo=1&extras=geo,tags,machine_tags&format=json&jsoncallback=?';
+  
+  $.getJSON(flickrCall, displayImages);
+}
+

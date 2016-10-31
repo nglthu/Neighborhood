@@ -179,3 +179,7 @@ dir {
   z-index: 1002;
   overflow: auto;
 }
+.flickr{
+	width:20px;
+	height: 20px;
+}

@@ -16,11 +16,11 @@
 		<div class="options-box">
 			<button onClick="location.reload();" class="btn"></button>
 			
-			<input data-bind="value: Query, valueUpdate: 'keyup', event:{keypress:  enterSearch}" autocomplete="on" placeholder="Search:" class="input">
+			<input data-bind="value: Query, valueUpdate: 'keyup', event:{keypress:  enterSearch}" autocomplete="off" placeholder="Search:" class="input">
 			<button data-bind="click:textSearchPlaces" class="btn2"></button>
 			<h1>Location names:</h1>
 			<ul data-bind="foreach: searchResults">
-				<a href="#" data-bind="text: title, click:$root.textSearchPlacesLink($data)"> </a>
+				<a href="#" data-bind="text: title,valueUpdate: 'keyup', event:{keypress:$root.textSearchPlacesLink($data)"> </a>
 				
 				<br/> </ul>
 		</div>
@@ -32,7 +32,7 @@
 		viewModel.searchResults = ko.computed(function () {
 			var q = viewModel.Query().toLowerCase();
 			return viewModel.locations.filter(function (i) {
-				return i.title.toLowerCase().indexOf(q) >=0;
+				return i.title.toLowerCase().indexOf(q)>=0;
 			});
 		});
 		viewModel.textSearchPlaces = ko.observable();

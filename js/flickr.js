@@ -8,7 +8,7 @@
 		var photoURL = '//farm' + item.farm + '.static.flickr.com/' + item.server + '/' + item.id + '_' + item.secret + '_m.jpg';
 		var htmlImageString = '<img src="' + photoURL + '" alt="' + item.title + '" class="image"/>';
 		var imgLink = '<a href="https://www.flickr.com/photos/culkin/' + item.id + '/in/dateposted-public/" target="_blank">View on <img src="css/flickr.jpg" class="flickr"/></a>'
-		return '<div class="pop_up_image_box_text">' + '<strong>' + item.title + '</strong><br>' + detail + '<br>' + htmlImageString + '<br>' + imgLink + '</div>';
+		return '<div>' + '<strong>' + item.title + '</strong><br>' + detail + '<br>' + htmlImageString + '<br>' + imgLink + '</div>';
 	}
 	//loading the images using the Flickr API.
 	function loadPhotos() {

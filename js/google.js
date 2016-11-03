@@ -136,10 +136,7 @@ function initMap() {
 	};
 	model.Query = ko.observable('');
 	model.searchResults = ko.computed(function () {
-	var q = model.Query().toLowerCase();
-	return model.locations.filter(function (i) {
-		return i.title.toLowerCase().indexOf(q) >= 0;
-	});
+	
 	var matches = [];
 	console.log(markers);
 	var query = new RegExp(model.Query(), 'i');

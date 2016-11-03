@@ -1,135 +1,181 @@
-	var map;
-	var infowindow = [];
-	var marker = [];
-
-	function displayImages(rsp) {
-		console.log(rsp);
-		//Loop through the results in the JSON array. The 'rsp.photos.photo' and viewModel.locations.
-		$.each(rsp.photos.photo, function (i, item) {
-			$.each(viewModel.locations, function (j, location) {
-				//Read in the lat and long of each photo and stores it in a variable.
-				if (item.title == location.title) {
-					var detail = location.detail;
-					var markerLat = item.latitude;
-					var markerLong = item.longitude;
-					var photoTitle = item.title;
-					detailInfo(item);
-					//Create a new info window using the Google Maps API
-					infowindow[i] = new google.maps.InfoWindow({
-						//Adds the content, which includes the html to display the image from Flickr, to the info window.
-						content: detailInfo(item, detail)
-					});
-					//Create a new marker position using the Google Maps API
-					var myLatlngMarker = new google.maps.LatLng(markerLat, markerLong);
-					//Create a new marker using the Google Maps API and assign the marker to the map created below.
-					marker[i] = addMarker(myLatlngMarker, photoTitle, map)
-						//info window to open if the box marker is mouseover.
-					google.maps.event.addListener(marker[i], 'mouseover', function () {
-						infowindow[i].open(map, marker[i]);
-						//Makes marker icon come to the front when clicked.
-						marker[i].setZIndex(google.maps.Marker.MAX_ZINDEX + 1);
-					});
-					google.maps.event.addListener(marker[i], 'mouseout', function () {
-						infowindow[i].close();
-					});
-					markerBouncing(marker[i]);
-				}
+var map;
+var infowindow = [];
+//var marker = [];
+function displayImages(selectedChoice) {
+	/*$.each(model.locations, function (i, location) {
+		//Read in the lat and long of each photo and stores it in a variable.
+		var detail = location.detail;
+		var markerLat = parseFloat(location.location.lat);
+		var markerLong = parseFloat(location.location.lng);
+		var photoTitle = location.title;
+		var searchPhotoURL = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=fc2bbb66b8ec6a5bc5a2c8fac8970a8d&lat=' + markerLat + '&lon=' + markerLong + '&radius=0.05&per_page=3&format=json&nojsoncallback=1';
+		$.getJSON(searchPhotoURL).done(function (item) {
+			detailInfo(item);
+			//Create a new info window using the Google Maps API
+			infowindow[i] = new google.maps.InfoWindow({
+				//Adds the content, which includes the html to display the image from Flickr, to the info window.
+				content: '<div><strong>' + photoTitle + '</strong></div> <div>' + detail + '</div> ' + detailInfo(item)
+				, maxWidth: 300
 			});
-			
-		});
-	}
-
-	function markerBouncing(marker) {
-		google.maps.event.addListener(marker, 'mouseover', function () {
-			this.setAnimation(google.maps.Animation.BOUNCE);
-		});
-		google.maps.event.addListener(marker, 'mouseout', function () {
-			this.setAnimation(null);
-		});
-	}
-
-	function display(selectedChoice) {
-		console.log("selected choice:" + selectedChoice);
-		console.log("Display called");
-		hideMarkers(marker);
-		var marker2 = new google.maps.Marker();
-		marker2.setMap(null);
-		console.log(rsp);
-		$.each(rsp.photos.photo, function (i, item) {
-			$.each(viewModel.locations, function (j, location) {
-				if (item.title.toLowerCase() == selectedChoice.toLowerCase()) {
-					if (location.title.toLowerCase() == selectedChoice.toLowerCase()) {
-						var markerLat = item.latitude;
-						var markerLong = item.longitude;
-						var photoTitle = item.title;
-						var detail = location.detail;
-						console.log(detail);
-						detailInfo(item);
-						infowindow = new google.maps.InfoWindow({
-							//Adds the content, which includes image from Flickr,  and detail from locations to the info window.
-							content: detailInfo(item, detail)
-						});
-						//Create a new marker position using the Google Maps API
-						var myLatlngMarker = new google.maps.LatLng(markerLat, markerLong);
-						//Create a new marker using the Google Maps API and assign the marker to the map created below.
-						marker2 = addMarker(myLatlngMarker, photoTitle, map, detail)
-						markerBouncing(marker2);
-						marker.push(marker2);
-						//window info
-						infowindow.open(map, marker2);
-						//Makes marker icon come to the front when clicked.
-						marker2.setZIndex(google.maps.Marker.MAX_ZINDEX + 1);
-					}
-				}
-			});
-		});
-	}
-
-	function hideMarkers(marker) {
-		for (var i = 0; i < marker.length; i++) {
-			marker[i].setMap(null);
-		}
-	}
-	var addMarker = function (position, title, map, detail) {
-		return new google.maps.Marker({
-			position: position
-			, title: title
-			, detail: detail
-			, map: map
-			, draggable: true
-			, animation: google.maps.Animation.DROP
-		});
-	}
-
-	function googleError() {
-		alert("Map loading error");
-		console.log("Map loading error");
-	}
-	//THE MAIN FUNCTION THAT IS CALLED WHEN THE WEB PAGE LOADS 
-	function initMap() {
-		map = new google.maps.Map(document.getElementById("map"), {
-			center: {
-				lat: -36.85293
-				, lng: 174.7611372
+			//Create a new marker position using the Google Maps API
+			var myLatlngMarker = new google.maps.LatLng(markerLat, markerLong);
+			//Create a new marker using the Google Maps API and assign the marker to the map created below.
+			marker[i] = addMarker(myLatlngMarker, photoTitle, map, detail);
+			//info window to open if the box marker is mouseover.
+			if (photoTitle.toLowerCase() == selectedChoice.toLocaleLowerCase()) {
+				console.log("matching:");
+				infowindow[i].open(map, marker[i]);
+				
+	
 			}
-			, zoom: 13
-			, scaleControl: true
-			, streetViewControl: false
-			, mapTypeControl: true
-			, mapTypeId: google.maps.MapTypeId.ROADMAP
-		});
-		//After the map is generated run the function that grabs the photo rsp
-		viewModel.textSearchPlaces = function () {
-			console.log("textSearchPlaces called");
-			var selectedChoice = viewModel.Query();
-			display(selectedChoice);
-			console.log("query:" + viewModel.Query());
-		};
-		viewModel.textSearchPlacesLink = function (data) {
-			console.log("textSearchPlacesLink called");
-			var selectedChoice = data.title;
-			console.log("data link: " + selectedChoice);
-			display(selectedChoice);
-		};
-		loadPhotos();
+			else {
+				google.maps.event.addListener(marker[i], 'click', function () {
+					infowindow[i].open(map, marker[i]);
+					//Makes marker icon come to the front when clicked.
+					marker[i].setZIndex(google.maps.Marker.MAX_ZINDEX + 1);
+				});
+				markerBouncing(marker[i]);
+			}
+			google.maps.event.addListener(marker[i], 'mouseout', function () {
+				infowindow[i].close();
+			});
+		}).fail(function () {
+			alert('fail to load photo');
+			console.log('fail to load photo');
+		});;;
+	});*/
+};
+/*}*/
+function markerBouncing(marker) {
+	google.maps.event.addListener(marker, 'click', function () {
+		this.setAnimation(google.maps.Animation.BOUNCE);
+	});
+	google.maps.event.addListener(marker, 'mouseout', function () {
+		this.setAnimation(null);
+	});
+}
+
+function hideMarkers(marker) {
+	for (var i = 0; i < marker.length; i++) {
+		marker[i].setMap(null);
 	}
+}
+var addMarker = function (position, title, map, detail) {
+	return new google.maps.Marker({
+		position: position
+		, title: title
+		, detail: detail
+		, map: map
+		, draggable: true
+			/*, animation: google.maps.Animation.BOUNCE*/
+	});
+}
+
+function googleError() {
+	alert("Map loading error");
+	console.log("Map loading error");
+}
+//THE MAIN FUNCTION THAT IS CALLED WHEN THE WEB PAGE LOADS 
+function initMap() {
+	var markers = [];
+	map = new google.maps.Map(document.getElementById("map"), {
+		center: {
+			lat: -36.85293
+			, lng: 174.7611372
+		}
+		, zoom: 13
+		, scaleControl: true
+		, streetViewControl: false
+		, mapTypeControl: true
+		, mapTypeId: google.maps.MapTypeId.ROADMAP
+	});
+	//displayImages("");
+	//
+	$.each(model.locations, function (i, location) {
+		//Read in the lat and long of each photo and stores it in a variable.
+		var detail = location.detail;
+		var markerLat = parseFloat(location.location.lat);
+		var markerLong = parseFloat(location.location.lng);
+		var photoTitle = location.title;
+		var searchPhotoURL = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=fc2bbb66b8ec6a5bc5a2c8fac8970a8d&lat=' + markerLat + '&lon=' + markerLong + '&radius=0.05&per_page=3&format=json&nojsoncallback=1';
+		$.getJSON(searchPhotoURL).done(function (item) {
+			detailInfo(item);
+			//Create a new info window using the Google Maps API
+			infowindow[i] = new google.maps.InfoWindow({
+				//Adds the content, which includes the html to display the image from Flickr, to the info window.
+				content: '<div><strong>' + photoTitle + '</strong></div> <div>' + detail + '</div> ' + detailInfo(item)
+				, maxWidth: 300
+			});
+			//Create a new marker position using the Google Maps API
+			var myLatlngMarker = new google.maps.LatLng(markerLat, markerLong);
+			//Create a new marker using the Google Maps API and assign the marker to the map created below.
+			var marker = addMarker(myLatlngMarker, photoTitle, map, detail);
+			//info window to open if the box marker is mouseover.
+			markers.push(marker);
+			google.maps.event.addListener(marker, 'click', function () {
+				infowindow[i].open(map, marker);
+				//Makes marker icon come to the front when clicked.
+				marker.setZIndex(google.maps.Marker.MAX_ZINDEX + 1);
+			});
+			markerBouncing(marker);
+			google.maps.event.addListener(marker, 'mouseout', function () {
+				infowindow[i].close();
+			});
+		}).fail(function () {
+			alert('fail to load photo');
+			console.log('fail to load photo');
+		});;;
+	});
+	//
+	//After the map is generated run the function that grabs the photo rsp
+	model.textSearchPlaces = function () {
+		console.log("textSearchPlaces called");
+		var selectedChoice = model.Query();
+		displayImages(selectedChoice);
+		console.log("query:" + model.Query());
+	};
+	model.Query = ko.observable('');
+	model.searchResults = ko.computed(function () {
+	var q = model.Query().toLowerCase();
+	return model.locations.filter(function (i) {
+		return i.title.toLowerCase().indexOf(q) >= 0;
+	});
+	var matches = [];
+	console.log(markers);
+	var query = new RegExp(model.Query(), 'i');
+	$.each(model.locations, function (j, location) {
+		if (location.title.search(query) !== -1) {
+			matches.push(location);
+		}
+		else {
+			markers[j].setVisible(false);
+		}
+	});
+	$.each(markers, function (j, marker) {
+		if (marker.title.toLowerCase().search(query) !== -1) {
+			marker.setVisible(true);
+		}
+		else marker.setVisible(false);
+	});
+	return matches;
+});
+	model.textSearchPlaces = ko.observable();
+	model.textSearchPlacesLink = ko.observable();
+	//when enter, textSearch Places called
+	model.enterSearch = function (d, e) {
+		e.keyCode === 13 && model.textSearchPlaces();
+		return true;
+	};
+	model.textSearchPlacesLink = function (data) {
+		/*console.log("textSearchPlacesLink called");
+		var selectedChoice = data.title;
+		console.log("data link: " + selectedChoice);
+		//loadselectedPhotos();
+		displayImages(selectedChoice);*/
+		//data.focus();
+		google.maps.event.trigger(data, 'click');
+		alert(data);
+		console.log(data);
+	};
+	ko.applyBindings(model);
+}

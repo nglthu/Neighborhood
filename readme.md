@@ -15,6 +15,5 @@
 
 1. Download this source code 
 2. Load the app using a localhost server
-
 2.1 To set up local host server on different platform: https://www.maketecheasier.com/setup-local-web-server-all-platforms/
 3. Follow step from 2 to 6 in the Run offline. 

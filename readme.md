@@ -16,19 +16,17 @@
 1. Download this source code 
 2. Load the app using a localhost server
 
-* To set up local host server on Window: 
+	* To set up local host server on Window: 
 
-Step 1:
-Click the Windows Start button and select "Control Panel." A window opens with a list of system options and utilities.
+	Step 1:
+	Click the Windows Start button and select "Control Panel." A window opens with a list of system options and utilities.
+	Step 2:
+	Click the "Programs" link. Click "Turn Windows Features On or Off." A list of currently installed programs displays.
+	Step 3:
+	Check the box labeled "Internet Information Services." Click "OK." The IIS service installs on the computer.
 
-Step 2:
-Click the "Programs" link. Click "Turn Windows Features On or Off." A list of currently installed programs displays.
+	* Unzip this source code and Copy it to: C:\inetpub\wwwroot
 
-Step 3:
-Check the box labeled "Internet Information Services." Click "OK." The IIS service installs on the computer.
+	* Run as follow: http://127.0.0.1/Neighborhood/index.html
 
-* Unzip this source code and Copy it to: C:\inetpub\wwwroot
-
-* Run as follow: http://127.0.0.1/Neighborhood/index.html
-
-3. Follow steps from 2 to 6 in the Run online to experience with the app. 
+3.Follow steps from 2 to 6 in the Run online to experience with the app. 

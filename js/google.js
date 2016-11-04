@@ -8,11 +8,12 @@ function markerBouncing(marker) {
 		this.setAnimation(null);
 	});
 }
-function hideMarkers(marker) {
-	for (var i = 0; i < marker.length; i++) {
-		marker[i].setMap(null);
-	}
+function stopAnimation(marker) {
+	setTimeout(function () {
+		marker.setAnimation(null);
+	}, 1000);
 }
+
 var addMarker = function (position, title, map, detail) {
 	return new google.maps.Marker({
 		position: position, 
@@ -30,11 +31,7 @@ function googleError() {
 	console.log("Map loading error");
 }
 
-function stopAnimation(marker) {
-	setTimeout(function () {
-		marker.setAnimation(null);
-	}, 3000);
-}
+
 //THE MAIN FUNCTION THAT IS CALLED WHEN THE WEB PAGE LOADS 
 function initMap() {
 	var markers = [];
@@ -54,8 +51,9 @@ function initMap() {
 	var markerLat = parseFloat(location.location.lat);
 	var markerLong = parseFloat(location.location.lng);
 	var photoTitle = location.title;
-	var searchPhotoURL = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=fc2bbb66b8ec6a5bc5a2c8fac8970a8d&lat=' + markerLat + '&lon=' + markerLong + '&radius=0.05&per_page=3&format=json&nojsoncallback=1';
-	$.getJSON(searchPhotoURL).done(function (item) {
+		
+	var searchPhotoURL = getPhotos(markerLat, markerLong);
+	$.getJSON(searchPhotoURL).done(function (item){
 		detailInfo(item);
 		//Create a new info window using the Google Maps API
 		var infowindow = new google.maps.InfoWindow({
@@ -80,11 +78,11 @@ function initMap() {
 			infowindow.close();
 		});
 	}).fail(function () {
-		alert('fail to load photo');
-		console.log('fail to load photo');
+		alert('fail to load photo of'+location.title);
+		console.log('fail to load photo'+location.title);
 	});
 });
-//
+
 //After the map is generated run the function that grabs the photo rsp
 model.Query = ko.observable('');
 model.textSearchPlacesLink = ko.observable();
@@ -133,12 +131,10 @@ model.textSearchPlacesLink = function (data) {
 	});
 	$.each(markers, function (j, marker) {
 		if (marker.title.toLowerCase().search(string) !== -1) {
-			//marker.setVisible(true);
-			//google.maps.event.trigger(marker, 'click');
 			marker.setAnimation(google.maps.Animation.BOUNCE);
 			stopAnimation(marker);
 			infoWindows[j].open(map, marker);
-			console.log("co vao day ko");
+			
 		}
 		//console.log(data);
 	});

@@ -67,6 +67,7 @@ var addMarker = function (position, title, map, detail) {
 		, detail: detail
 		, map: map
 		, draggable: true
+		, current: false
 			/*, animation: google.maps.Animation.BOUNCE*/
 	});
 }
@@ -75,9 +76,16 @@ function googleError() {
 	alert("Map loading error");
 	console.log("Map loading error");
 }
+
+function stopAnimation(marker) {
+	setTimeout(function () {
+		marker.setAnimation(null);
+	}, 3000);
+}
 //THE MAIN FUNCTION THAT IS CALLED WHEN THE WEB PAGE LOADS 
 function initMap() {
 	var markers = [];
+	var infoWindows = [];
 	map = new google.maps.Map(document.getElementById("map"), {
 		center: {
 			lat: -36.85293
@@ -101,7 +109,7 @@ function initMap() {
 		$.getJSON(searchPhotoURL).done(function (item) {
 			detailInfo(item);
 			//Create a new info window using the Google Maps API
-			infowindow[i] = new google.maps.InfoWindow({
+			var infowindow = new google.maps.InfoWindow({
 				//Adds the content, which includes the html to display the image from Flickr, to the info window.
 				content: '<div><strong>' + photoTitle + '</strong></div> <div>' + detail + '</div> ' + detailInfo(item)
 				, maxWidth: 300
@@ -112,14 +120,15 @@ function initMap() {
 			var marker = addMarker(myLatlngMarker, photoTitle, map, detail);
 			//info window to open if the box marker is mouseover.
 			markers.push(marker);
+			infoWindows.push(infowindow);
 			google.maps.event.addListener(marker, 'click', function () {
-				infowindow[i].open(map, marker);
+				infowindow.open(map, marker);
 				//Makes marker icon come to the front when clicked.
 				marker.setZIndex(google.maps.Marker.MAX_ZINDEX + 1);
 			});
 			markerBouncing(marker);
 			google.maps.event.addListener(marker, 'mouseout', function () {
-				infowindow[i].close();
+				infowindow.close();
 			});
 		}).fail(function () {
 			alert('fail to load photo');
@@ -128,51 +137,71 @@ function initMap() {
 	});
 	//
 	//After the map is generated run the function that grabs the photo rsp
-	model.textSearchPlaces = function () {
-		console.log("textSearchPlaces called");
-		var selectedChoice = model.Query();
-		displayImages(selectedChoice);
-		console.log("query:" + model.Query());
-	};
 	model.Query = ko.observable('');
-	model.searchResults = ko.computed(function () {
-	
-	var matches = [];
-	console.log(markers);
-	var query = new RegExp(model.Query(), 'i');
-	$.each(model.locations, function (j, location) {
-		if (location.title.search(query) !== -1) {
-			matches.push(location);
-		}
-		else {
-			markers[j].setVisible(false);
-		}
-	});
-	$.each(markers, function (j, marker) {
-		if (marker.title.toLowerCase().search(query) !== -1) {
-			marker.setVisible(true);
-		}
-		else marker.setVisible(false);
-	});
-	return matches;
-});
-	model.textSearchPlaces = ko.observable();
 	model.textSearchPlacesLink = ko.observable();
+	model.searchResults = ko.computed(function () {
+		$.each(infoWindows, function (j, infowindow) {
+			infowindow.close();
+		});
+		var matches = [];
+		//console.log(markers);
+		var query = new RegExp(model.Query(), 'i');
+		console.log("query");
+		console.log(query);
+		$.each(model.locations, function (j, location) {
+			if (location.title.search(query) !== -1) {
+				matches.push(location);
+			}
+			else {
+				markers[j].setVisible(false);
+			}
+		});
+		$.each(markers, function (j, marker) {
+			if (marker.title.toLowerCase().search(query) !== -1) {
+				marker.setVisible(true);
+			}
+			else marker.setVisible(false);
+		});
+		return matches;
+	});
+	//model.textSearchPlacesLink = ko.observable();
 	//when enter, textSearch Places called
 	model.enterSearch = function (d, e) {
-		e.keyCode === 13 && model.textSearchPlaces();
+		e.keyCode === 13 && model.textSearchPlacesLink(model.Query());
 		return true;
 	};
 	model.textSearchPlacesLink = function (data) {
-		/*console.log("textSearchPlacesLink called");
-		var selectedChoice = data.title;
-		console.log("data link: " + selectedChoice);
-		//loadselectedPhotos();
-		displayImages(selectedChoice);*/
-		//data.focus();
-		google.maps.event.trigger(data, 'click');
-		alert(data);
-		console.log(data);
+		if (typeof (data) === 'string') {
+			var string = model.Query().toLowerCase();
+			console.log("test object called");
+		}
+		else {
+			string = data.title.toLowerCase();
+			console.log("test vao day ko"+data.title);
+		}
+		$.each(infoWindows, function (j, infowindow) {
+			infowindow.close();
+		});
+		$.each(markers, function (j, marker) {
+			if (marker.title.toLowerCase().search(string) !== -1) {
+				//marker.setVisible(true);
+				//google.maps.event.trigger(marker, 'click');
+				marker.setAnimation(google.maps.Animation.BOUNCE);
+				stopAnimation(marker);
+				infoWindows[j].open(map, marker);
+				console.log("co vao day ko");
+			}
+			//console.log(data);
+		});
+		
+	};
+	model.textSearchPlaces = function () {
+		$.each(infoWindows, function (j, infowindow) {
+			infowindow.close();
+		});
+		var data=model.Query();
+		model.textSearchPlacesLink(data);
+		
 	};
 	ko.applyBindings(model);
 }

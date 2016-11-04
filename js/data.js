@@ -1,10 +1,12 @@
-$('#hide').on('click', function (event) {
+$('.hide').on('click', function (event) {
 	$('.options-box').toggle('hide');
 	$('#mapPart').removeClass("map-div").addClass("map2");
+	$('.show').show();
 });
-$('#show').on('click', function (event) {
+$('.show').on('click', function (event) {
 	$('.options-box').toggle('show');
 	$('#mapPart').removeClass("map2").addClass("map-div");
+	$('.show').hide();
 });
 var model = {
 	locations: [{

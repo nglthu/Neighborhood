@@ -73,6 +73,7 @@ hr {
 	top:50px;
 	right:0px;
 	background-color: white;
+	color:grey;
 	
 }
 .show{
@@ -80,6 +81,7 @@ hr {
 	top:50px;
 	left:10px;
 	background-color:white;
+	color:grey;
 	
 }
 
@@ -218,6 +220,7 @@ dir {
 	text-decoration: none;
     cursor: pointer;
 	background-color:#a3c3f7;
+	
 }
 li {
     color:grey;

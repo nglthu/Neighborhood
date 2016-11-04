@@ -3,10 +3,12 @@ var map;
 function markerBouncing(marker) {
 	google.maps.event.addListener(marker, 'click', function () {
 		this.setAnimation(google.maps.Animation.BOUNCE);
+		stopAnimation(marker);
 	});
 	google.maps.event.addListener(marker, 'mouseout', function () {
 		this.setAnimation(null);
 	});
+	
 }
 function stopAnimation(marker) {
 	setTimeout(function () {
@@ -74,6 +76,7 @@ function initMap() {
 			marker.setZIndex(google.maps.Marker.MAX_ZINDEX + 1);
 		});
 		markerBouncing(marker);
+		
 		google.maps.event.addListener(marker, 'mouseout', function () {
 			infowindow.close();
 		});

@@ -73,7 +73,7 @@ function initMap() {
 		google.maps.event.addListener(marker, 'click', function () {
 			infowindow.open(map, marker);
 			//Makes marker icon come to the front when clicked.
-			marker.setZIndex(google.maps.Marker.MAX_ZINDEX + 1);
+			marker.setZIndex(google.maps.Marker.MAX_ZINDEX + 100);
 		});
 		markerBouncing(marker);
 		

@@ -57,23 +57,25 @@ function initMap() {
 	var searchPhotoURL = getPhotos(markerLat, markerLong);
 	$.getJSON(searchPhotoURL).done(function (item){
 		detailInfo(item);
+		//Adds the content, which includes the html to display the image from Flickr
+		var content = '<div><strong>' + photoTitle + '</strong></div> <div>' + detail + '</div> ' + detailInfo(item);
 		//Create a new info window using the Google Maps API
 		var infowindow = new google.maps.InfoWindow({
-			//Adds the content, which includes the html to display the image from Flickr, to the info window.
-			content: '<div><strong>' + photoTitle + '</strong></div> <div>' + detail + '</div> ' + detailInfo(item),
+			content: content,
 			maxWidth: 300
 		});
 		//Create a new marker position using the Google Maps API
 		var myLatlngMarker = new google.maps.LatLng(markerLat, markerLong);
 		//Create a new marker using the Google Maps API and assign the marker to the map created below.
 		var marker = addMarker(myLatlngMarker, photoTitle, map, detail);
-		//info window to open if the box marker is mouseover.
+		
 		markers.push(marker);
 		infoWindows.push(infowindow);
+		//info window to open if the box marker is click.
 		google.maps.event.addListener(marker, 'click', function () {
 			infowindow.open(map, marker);
 			//Makes marker icon come to the front when clicked.
-			marker.setZIndex(google.maps.Marker.MAX_ZINDEX + 100);
+			marker.setZIndex(google.maps.Marker.MAX_ZINDEX + 1);
 		});
 		markerBouncing(marker);
 		

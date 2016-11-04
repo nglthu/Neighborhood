@@ -12,7 +12,7 @@ var model = {
 	locations: [{
 				title: 'Auckland Town Hall',
 				location: {lat: -36.8529, lng: 174.7633},
-				detail: 'It is a historic building on Queen Street<br> in downtown Auckland, New Zealand, <br>known both for its original and ongoing <br>use for administrative functions, <br>as well as for its famed Great Hall and <br>its separate Concert Chamber.'
+				detail: 'It is a historic building on Queen Street in downtown Auckland, New Zealand, known both for its original and ongoing use for administrative functions, as well as for its famed Great Hall and its separate Concert Chamber.'
 			}, 
 			{
 				title: 'AUT', 
@@ -22,7 +22,7 @@ var model = {
 			{
 				title: 'Auckland War Memorial Museum', 
 				location: {lat: -36.8604, lng: 174.7778}, 
-				detail: 'The Auckland War Memorial Museum <br>is one of New Zealand&#39; most important museums and war memorials. <br>Its collections concentrate on New Zealand history, <br> natural history, as well as military history.'
+				detail: 'The Auckland War Memorial Museum is one of New Zealand&#39; most important museums and war memorials. It&#39;s collections concentrate on New Zealand history, natural history, as well as military history.'
 			}, 
 			{
 				title: 'Britomart Transport Centre', 
@@ -42,7 +42,7 @@ var model = {
 			{
 				title: 'Eden Park', 
 				location: {	lat: -36.8750, lng: 174.7448}, 
-				detail: 'Eden Park is New Zealand &#39;s largest stadium.<br> Located in central Auckland, NZ &#39; s largest city,<br> it is three kilometres southwest of the CBD, <br>on the boundary between the suburbs <br>of Mount Eden and Kingsland'
+				detail: 'Eden Park is New Zealand &#39;s largest stadium. Located in central Auckland, NZ&#39;s largest city, it is three kilometres southwest of the CBD, on the boundary between the suburbs of Mount Eden and Kingsland'
 				},
 
 			{

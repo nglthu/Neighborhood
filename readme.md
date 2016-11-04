@@ -21,10 +21,10 @@
 Step 1:
 Click the Windows Start button and select "Control Panel." A window opens with a list of system options and utilities.
 
-Step 2
+Step 2:
 Click the "Programs" link. Click "Turn Windows Features On or Off." A list of currently installed programs displays.
 
-Step 3
+Step 3:
 Check the box labeled "Internet Information Services." Click "OK." The IIS service installs on the computer.
 
 2.2 Uzip this source code and Copy it to: C:\inetpub\wwwroot

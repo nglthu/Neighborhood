@@ -81,7 +81,7 @@ hr {
 	height:6%;
 	font-family: Arial;
 	font-size:10px;
-	border:none;	
+	border:solid 1px #a3c3f7;
 }
 
 .show{
@@ -93,7 +93,7 @@ hr {
 	height:6%;
 	font-family: Arial;
 	font-size:10px;
-	border:none;
+	border:solid 1px #a3c3f7;
 }
 
 .text {

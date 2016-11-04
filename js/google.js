@@ -116,7 +116,7 @@ model.searchResults = ko.computed(function () {
 	});
 	return matches;
 });
-//model.textSearchPlacesLink = ko.observable();
+
 //when enter, textSearch Places called
 model.enterSearch = function (d, e) {
 	e.keyCode === 13 && model.textSearchPlacesLink(model.Query());
@@ -125,17 +125,18 @@ model.enterSearch = function (d, e) {
 model.textSearchPlacesLink = function (data) {
 	if (typeof (data) === 'string') {
 		var string = model.Query().toLowerCase();
-		console.log("test object called");
+		
 	}
 	else {
 		string = data.title.toLowerCase();
-		console.log("test vao day ko" + data.title);
+		
 	}
 	$.each(infoWindows, function (j, infowindow) {
 		infowindow.close();
 	});
 	$.each(markers, function (j, marker) {
-		if (marker.title.toLowerCase().search(string) !== -1) {
+				
+		if (marker.title.toLowerCase()==string) {
 			marker.setAnimation(google.maps.Animation.BOUNCE);
 			stopAnimation(marker);
 			infoWindows[j].open(map, marker);

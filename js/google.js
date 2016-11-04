@@ -15,6 +15,11 @@ function stopAnimation(marker) {
 		marker.setAnimation(null);
 	}, 1000);
 }
+function closeInfoWindow(infoWindows){
+	$.each(infoWindows, function (j, infowindow) {
+			infowindow.close();
+		});
+}
 
 var addMarker = function (position, title, map, detail) {
 	return new google.maps.Marker({
@@ -73,9 +78,7 @@ function initMap() {
 		infoWindows.push(infowindow);
 		//info window to open if the box marker is click.
 		google.maps.event.addListener(marker, 'click', function () {
-		$.each(infoWindows, function (j, infowindow) {
-			infowindow.close();
-		});
+		closeInfoWindow(infoWindows);
 		infowindow.open(map, marker);
 	//Makes marker icon come to the front when clicked.
 		marker.setZIndex(google.maps.Marker.MAX_ZINDEX + 1);
@@ -134,9 +137,7 @@ model.textSearchPlacesLink = function (data) {
 		string = data.title.toLowerCase();
 		
 	}
-	$.each(infoWindows, function (j, infowindow) {
-		infowindow.close();
-	});
+	closeInfoWindow(infoWindows);
 	$.each(markers, function (j, marker) {
 				
 		if (marker.title.toLowerCase()==string) {
@@ -149,9 +150,7 @@ model.textSearchPlacesLink = function (data) {
 	});
 };
 model.textSearchPlaces = function () {
-	$.each(infoWindows, function (j, infowindow) {
-		infowindow.close();
-	});
+	//closeInfoWindow(infoWindows);
 	var data = model.Query();
 	model.textSearchPlacesLink(data);
 };

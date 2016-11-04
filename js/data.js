@@ -2,11 +2,13 @@ $('.hide').on('click', function (event) {
 	$('.options-box').toggle('hide');
 	$('#mapPart').removeClass("map-div").addClass("map2");
 	$('.show').show();
+	$('.hide').hide();
 });
 $('.show').on('click', function (event) {
 	$('.options-box').toggle('show');
 	$('#mapPart').removeClass("map2").addClass("map-div");
 	$('.show').hide();
+	$('.hide').show();
 });
 var model = {
 	locations: [{

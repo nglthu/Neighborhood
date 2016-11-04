@@ -12,7 +12,7 @@
 <body>
 	<div class="container">
 		<div class="options-box">
-			<button id="hide" class="hide">Hide</button>
+			
 			<input data-bind="textInput: Query, event:{keypress:  enterSearch}" autocomplete="on" placeholder="Search:" class="input">
 			<button data-bind="click:textSearchPlaces" class="btn2"></button>
 			<h1>Location names:</h1>
@@ -23,6 +23,7 @@
 		<div id="mapPart" class="map-div">
 			<div id="map" class="map"></div>
 			<button class="show" id="show" hidden>Show</button>
+			<button id="hide" class="hide">Hide</button>
 		</div>
 	</div>
 	<script src="js/data.js"></script>

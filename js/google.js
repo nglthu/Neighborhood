@@ -85,9 +85,6 @@ function initMap() {
 });
 		markerBouncing(marker);
 		
-		/*google.maps.event.addListener(marker, 'mouseout', function () {
-			infowindow.close();
-		});*/
 	}).fail(function () {
 		alert('fail to load photo of'+location.title);
 		console.log('fail to load photo'+location.title);

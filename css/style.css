@@ -70,6 +70,17 @@ hr {
 }
 .hide{
 	position:absolute;
+	top:50px;
+	right:0px;
+	background-color: white;
+	
+}
+.show{
+	position:absolute;
+	top:50px;
+	left:10px;
+	background-color:white;
+	
 }
 
 
@@ -198,11 +209,21 @@ dir {
 }
 
 .link:hover,
-.link:focus {
-    color: blue;
-    text-decoration: none;
+.link:focus,
+.hide:focus,
+.show:focus,
+.hide:hover,
+.show:hover{
+	color: black;
+	text-decoration: none;
     cursor: pointer;
+	background-color:#a3c3f7;
 }
+li {
+    color:grey;
+}
+
+
 div.gm-style-iw{
 	width:auto;
 }

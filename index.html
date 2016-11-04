@@ -12,7 +12,7 @@
 <body>
 	<div class="container">
 		<div class="options-box">
-			<button  class="hide" id="hide">Hide</button>
+			<button id="hide" class="hide">Hide</button>
 			<input data-bind="textInput: Query, event:{keypress:  enterSearch}" autocomplete="on" placeholder="Search:" class="input">
 			<button data-bind="click:textSearchPlaces" class="btn2"></button>
 			<h1>Location names:</h1>
@@ -21,18 +21,16 @@
 			</ul>
 		</div>
 		<div id="mapPart" class="map-div">
-			
-		<div id="map" class="map"></div>
-		<button  class="hide" id="show">Show</button>
-		</div>	
+			<div id="map" class="map"></div>
+			<button class="show" id="show">Show</button>
+		</div>
 	</div>
-	
 	<script src="js/data.js"></script>
 	<script src="js/google.js"></script>
 	<script src="js/flickr.js"></script>
 	<script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyBnaS5G8LBLYT0EqlZTIH7k3EHXK1GcPd8&v=3&callback=initMap" onerror="googleError()">
 	</script>
-	<!--<script async src="https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=fc2bbb66b8ec6a5bc5a2c8fac8970a8d&user_id=9071746%40N06&privacy_filter=1&has_geo=1&extras=geo,tags,machine_tags&format=json&jsoncallback=?" onerror="flickrError()"></script>-->
+	
 </body>
 
 </html>

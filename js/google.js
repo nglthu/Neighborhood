@@ -24,9 +24,7 @@ var addMarker = function (position, title, map, detail) {
 		title: title, 
 		detail: detail, 
 		map: map, 
-		draggable: true, 
-		current: false
-			
+		draggable: true 
 	});
 };
 
@@ -55,7 +53,6 @@ function initMap() {
 	var markerLat = parseFloat(location.location.lat);
 	var markerLong = parseFloat(location.location.lng);
 	var photoTitle = location.title;
-		
 	var searchPhotoURL = getPhotos(markerLat, markerLong);
 	$.getJSON(searchPhotoURL).done(function (item){
 		detailInfo(item);
@@ -73,33 +70,29 @@ function initMap() {
 		
 		markers.push(marker);
 		infoWindows.push(infowindow);
-		//info window to open if the box marker is click.
+		//Open infoWindow when marker is clicked.
 		google.maps.event.addListener(marker, 'click', function () {
 		closeInfoWindow(infoWindows);
 		infowindow.open(map, marker);
-	//Makes marker icon come to the front when clicked.
+	    //Makes marker icon come to the front when clicked.
 		marker.setZIndex(google.maps.Marker.MAX_ZINDEX + 1);
-});
+		});
 		markerBouncing(marker);
-		
+	//Add error handling for the Flickr $.getJSON request	
 	}).fail(function () {
 		alert('fail to load photo of'+location.title);
 		console.log('fail to load photo'+location.title);
 	});
 });
 
-//After the map is generated run the function that grabs the photo rsp
+
 model.Query = ko.observable('');
 model.textSearchPlacesLink = ko.observable();
+//search result to filter out option and marker	
 model.searchResults = ko.computed(function () {
-	$.each(infoWindows, function (j, infowindow) {
-		infowindow.close();
-	});
+	closeInfoWindow(infoWindows);
 	var matches = [];
-	//console.log(markers);
 	var query = new RegExp(model.Query(), 'i');
-	console.log("query");
-	console.log(query);
 	$.each(model.locations, function (j, location) {
 		if (location.title.search(query) !== -1) {
 			matches.push(location);
@@ -125,27 +118,22 @@ model.enterSearch = function (d, e) {
 model.textSearchPlacesLink = function (data) {
 	var string;
 	if (typeof (data) === 'string') {
-		string = model.Query().toLowerCase();
-		
+		string = model.Query().toLowerCase();	
 	}
 	else {
-		string = data.title.toLowerCase();
-		
+		string = data.title.toLowerCase();		
 	}
 	closeInfoWindow(infoWindows);
 	$.each(markers, function (j, marker) {
-				
-		if (marker.title.toLowerCase()==string) {
+			if (marker.title.toLowerCase()==string) {
 			marker.setAnimation(google.maps.Animation.BOUNCE);
 			stopAnimation(marker);
-			infoWindows[j].open(map, marker);
-			
+			infoWindows[j].open(map, marker);			
 		}
 		//console.log(data);
 	});
 };
 model.textSearchPlaces = function () {
-	//closeInfoWindow(infoWindows);
 	var data = model.Query();
 	model.textSearchPlacesLink(data);
 };

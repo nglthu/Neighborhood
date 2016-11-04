@@ -5,9 +5,6 @@ function markerBouncing(marker) {
 		this.setAnimation(google.maps.Animation.BOUNCE);
 		stopAnimation(marker);
 	});
-	google.maps.event.addListener(marker, 'mouseout', function () {
-		this.setAnimation(null);
-	});
 	
 }
 function stopAnimation(marker) {
@@ -31,7 +28,7 @@ var addMarker = function (position, title, map, detail) {
 		current: false
 			
 	});
-}
+};
 
 function googleError() {
 	alert("Map loading error");
@@ -126,8 +123,9 @@ model.enterSearch = function (d, e) {
 	return true;
 };
 model.textSearchPlacesLink = function (data) {
+	var string;
 	if (typeof (data) === 'string') {
-		var string = model.Query().toLowerCase();
+		string = model.Query().toLowerCase();
 		
 	}
 	else {

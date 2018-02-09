@@ -6,7 +6,7 @@
 [stars badge]:https://img.shields.io/github/stars/hey-red/Markdown.svg
 [issues badge]:https://img.shields.io/github/issues/hey-red/Markdown.svg
 
-[licence]:https://github.com/nglthu/Neighborhood/blob/master/LICENSE
+[licence]:https://github.com/nglthu/Neighborhood/blob/master/License
 [stars]:https://github.com/nglthu/Neighborhood/stargazers
 [issues]:https://github.com/nglthu/Neighborhood/issues
 

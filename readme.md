@@ -14,13 +14,15 @@
 
 A single-page web application, built using the Knockout framework, that displays a Google Map of an area and various points of interest. Users can search all included landmarks and, when selected, additional information about a landmark is presented from the Flickr API.
 
+<img src="images/demo.png" alt="demo" width="100%" height="100%">
+
 ## Run the application
 
 
 
 ### Run online
 
-1. Click the link: https://nglthu.github.io/Neighborhood/
+1. Click the [link](https://nglthu.github.io/Neighborhood/) to run
 2. There are a default list view of all supported destinations, click to see in detail without using search box.
 3. Typing any destination in Search box and enter. 
 4. Using search box to filter a destination in the list view based on the text typed in the search box.

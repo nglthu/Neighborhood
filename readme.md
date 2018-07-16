@@ -14,7 +14,7 @@
 
 A single-page web application, built using the Knockout framework, that displays a Google Map of an area and various points of interest. Users can search all included landmarks and, when selected, additional information about a landmark is presented from the Flickr API.
 
-<img src="images/demo.png" alt="demo" width="100%" height="100%">
+<img src="images/demo.png" alt="demo" width="50%" height="50%">
 
 ## Run the application
 
